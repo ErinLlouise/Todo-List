@@ -1,4 +1,26 @@
-import { CREATE_TODO, MARK_TODO_AS_COMPLETED, REMOVE_TODO } from "./actions"
+import { 
+    CREATE_TODO, 
+    MARK_TODO_AS_COMPLETED, 
+    REMOVE_TODO,
+    LOAD_TODOS_FAILURE,
+    LOAD_TODOS_IN_PROGRESS,
+    LOAD_TODOS_SUCCESS,
+     } from "./actions"
+
+     // the job of the following reducer is to return either true or false based on whatever actions occur in our app
+     export const isLoading = (state = false, action) => {
+        const { type } = action
+
+        switch (type) {
+            case LOAD_TODOS_IN_PROGRESS:
+                return true
+            case LOAD_TODOS_SUCCESS:
+            case LOAD_TODOS_FAILURE:
+                return false // because these actions signify that our app is not loading
+            default:
+                return state
+        }
+     }
 
 // any time an action is fired from anywhere is our application, our reducer function gets called
 // when this happens, the two arguments that gets passed to our reducer is the current state of 
