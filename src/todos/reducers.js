@@ -37,27 +37,29 @@ export const todos = (state = [], action) => {
     // we use the switch block to make the todos reducer respond correctly to our createTodo and removeTodo actions
     switch (type) {
         case CREATE_TODO: {
-            const { text } = payload
-            const newTodo = {
-                text,
-                isCompleted: false,
-            }
-            return state.concat(newTodo)
+            const { todo } = payload
+            return state.concat(todo)
         }
         case REMOVE_TODO: {
-            const { text } = payload
+            const { todo: todoRemove } = payload
             // return the state with the todo that we want removed filtered out
-            return state.filter(todo => todo.text !== text)
+            return state.filter(todo => todo.id !== todoToRemove.id)
         }
         case MARK_TODO_AS_COMPLETED: {
-            const { text } = payload
+            const { todo: updatedTodo } = payload
             return state.map(todo => {
-                if (todo.text === text) {
-                    return {...todo, isCompleted: true}
+                if (todo.id === updatedTodo.id) {
+                    return updatedTodo
                 }
                 return todo
             })
         }
+        case LOAD_TODOS_IN_PROGRESS: {
+            const { todos } = payload
+            return todos
+        }
+        case LOAD_TODOS_SUCCESS: 
+        case LOAD_TODOS_FAILURE: 
         // we must return the state even if no changes are made to it
         // otherwise redux will think it is undefined and will throw an error
         default:

@@ -6,6 +6,7 @@ import thunk from 'redux-thunk'
 import { composeWithDevTools } from "redux-devtools-extension"
 import { todos, isLoading } from './todos/reducers'
 
+// reducers are hooked up to redux store
 const reducers = {
     todos,
     isLoading,

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-import { createTodo } from './actions'
 import { connect } from 'react-redux'
+import { addTodoRequest } from './thunks'
+
 
 const NewTodoForm = ({ todos, onCreatePressed }) => {
     const [ inputValue, setInputValue ] = useState('')
@@ -35,7 +36,7 @@ const mapStateToProps = state => ({
 // dispatch is a function that allows our components to trigger actions that our redux store will respond to
 // e.g we want to create a redux action when the user clicks the create todo button
 const mapDisatchToProps = dispatch => ({
-    onCreatePressed: text => dispatch(createTodo(text)),
+    onCreatePressed: text => dispatch(addTodoRequest(text)),
 })
 // we have passed our component a prop called onCreatePressed that takes an argument called text
 // text calls the dispatch function which then calls the createTodo action
